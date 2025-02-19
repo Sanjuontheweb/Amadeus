@@ -1,6 +1,7 @@
 const container = document.querySelector(".container");
 const chatsContainer = document.querySelector('.chats-container-js');
 const promptForm = document.querySelector('.prompt-form-js');
+const themeToggle = document.querySelector('#theme-toggle-btn');
 const promptInput = promptForm.querySelector('.prompt-value-js');
 const fileInput = promptForm.querySelector('#file-input');
 const fileUploadWrapper = promptForm.querySelector('.file-upload-wrapper');
@@ -114,7 +115,8 @@ const handleFormSubmit = (e) => {
 
   setTimeout(() => {
     // generate AI message html and addin the chats container in 500ms
-    const AIMsgHTML = `<img src="amadeus.png" class="avatar"><p class="message-text"></p>`;
+    let AIMsgHTML;
+    AIMsgHTML = `<img src="amadeus.png" class="avatar"><p class="message-text"></p>`;
     const AIMsgDiv = createMsgElement(AIMsgHTML, "ai-message", "loading");
     chatsContainer.appendChild(AIMsgDiv);
     generateResponse(AIMsgDiv);
@@ -160,9 +162,19 @@ document.querySelector("#delete-chats-btn").addEventListener("click", () => {
   chatHistory.length = 0;
   chatsContainer.innerHTML = '';
   document.body.classList.remove("bot-responding");
-})
+});
+
+themeToggle.addEventListener("click", (AIMsgHTML) => {
+  const isLightTheme = document.body.classList.toggle("light-theme");
+  themeToggle.textContent = isLightTheme ? "dark_mode" : "light_mode";
+  localStorage.setItem("themeColor", isLightTheme ? "light_mode" : "dark_mode");
+});
+
+// get the initial theme from localStorage
+const isLightTheme = localStorage.getItem("themeColor") === "light_mode";
+themeToggle.textContent = isLightTheme ? "dark_mode" : "light_mode";
+document.body.classList.toggle("light-theme", isLightTheme); 
 
 promptForm.addEventListener("submit", handleFormSubmit);
 promptForm.querySelector('#add-file-btn').addEventListener("click", () => fileInput.click())
-
 

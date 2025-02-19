@@ -16,6 +16,25 @@
   --secondary-color: #161b2d;
   --secondary-hover-color: #333e58;
   --scrollbar-color: #626a7f;
+  --button-colors: #161b2d;
+  --button-hover-colors: #febf34;
+  --send-button: #1ce9ed;
+  --send-button-hover: #16b7ba;
+}
+
+body.light-theme {
+  /* Light theme colors */
+  --text-color: #030303;
+  --subheading-color: #282e3b;
+  --placeholder-color: #22252a;
+  --primary-color: #febf34;
+  --secondary-color: #d3a904;
+  --secondary-hover-color: #dfdede;
+  --scrollbar-color: #575c6a;
+  --button-colors: #fbfafa;
+  --button-hover-colors: #232323;
+  --send-button: #09325e;
+  --send-button-hover: #041023;
 }
 
 body {
@@ -269,12 +288,12 @@ body {
 
 .prompt-form #send-prompt-btn {
   color: white;
-  background: #1ce9ed;
+  background: var(--send-button);
   display: none;
 }
 
 .prompt-form #send-prompt-btn:hover {
-  background: #16b7ba;
+  background: var(--send-button-hover);
 }
 
 .prompt-form #stop-prompt-btn,
@@ -307,7 +326,10 @@ body.bot-responding .prompt-form #stop-prompt-btn {
 }
 
 .prompt-wrapper #delete-chats-btn:hover {
-  color: #febf34;
+  color: var(--button-hover-colors);
+}
+.prompt-wrapper #theme-toggle-btn:hover {
+  color: var(--button-hover-colors);
 }
 
 .prompt-form .file-icon {
