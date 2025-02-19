@@ -35,7 +35,7 @@ const generateResponse = async(AIMsgDiv) => {
       }
       else {
         clearInterval(typingInterval);
-        document.body.classList.remove("bot-responding");
+        document.body.classList.remove("AI-responding");
       }
     }, 50);
   }
@@ -73,7 +73,7 @@ const generateResponse = async(AIMsgDiv) => {
   catch (error) {
     textEle.style.color = "#febf34";
     textEle.textContent = error.name === "AbortError" ? "Response generation stopped" : error.message;
-    document.body.classList.remove("bot-responding");
+    document.body.classList.remove("AI-responding");
     scrollToBottom();
   }
   finally {
@@ -93,11 +93,11 @@ const createMsgElement = (content, ...classes) => {
 const handleFormSubmit = (e) => {
   e.preventDefault();
   const usermsg = promptInput.value.trim();
-  if(!usermsg || document.body.classList.contains("bot-responding")) return;
+  if(!usermsg || document.body.classList.contains("AI-responding")) return;
 
   promptInput.value = "";
   userData.message = usermsg;
-  document.body.classList.add("bot-responding");
+  document.body.classList.add("AI-responding", "chats-active");
 
   // generate user html with optonal file attachment
 
@@ -143,6 +143,13 @@ fileInput.addEventListener("change", () => {
   }
 });
 
+document.querySelectorAll(".suggestions-item").forEach(item => {
+  item.addEventListener("click", () => {
+    promptInput.value = item.querySelector(".text").textContent;
+    promptForm.dispatchEvent(new Event("submit"));
+  })
+})
+
 // cancel file functionality
 document.querySelector("#cancel-file-btn").addEventListener("click", () => {
   fileUploadWrapper.classList.remove("active", "img-attached", "file-attached");
@@ -154,14 +161,22 @@ document.querySelector("#stop-prompt-btn").addEventListener("click", () => {
   userData.file = {}
   controller?.abort();
   clearInterval(typingInterval);
-  document.body.classList.remove("bot-responding");
+  document.body.classList.remove("AI-responding");
 });
 
 // delete chats
 document.querySelector("#delete-chats-btn").addEventListener("click", () => {
   chatHistory.length = 0;
   chatsContainer.innerHTML = '';
-  document.body.classList.remove("bot-responding");
+  document.body.classList.remove("AI-responding", "chats-active");
+});
+
+// show/hide controls for phone
+document.addEventListener("click", ({ target }) => {
+  const wrapper = document.querySelector(".prompt-wrapper");
+  const shouldHide = target.classList.contains("prompt-input-box") || (wrapper.classList.contains("hide-controls")
+                      && (target.id === "add-file-btn" || target.id === "stop-response-btn"));
+  wrapper.classList.toggle("hide-controls", shouldHide);
 });
 
 themeToggle.addEventListener("click", (AIMsgHTML) => {
