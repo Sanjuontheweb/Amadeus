@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Dark-theme colors */
+  --text-color: #e3ecff;
+  --subheading-color: #879cc9;
+  --placeholder-color: #b4c4e0;
+  --primary-color: #000000;
+  --secondary-color: #161b2d;
+  --secondary-hover-color: #333e58;
+  --scrollbar-color: #626a7f;
+}
+
+body {
+  color: var(--text-color);
+  background: var(--primary-color); 
+}
+
+.container {
+  padding: 32px 0px 60px;
+  overflow-y: auto;
+  max-height: calc(100vh - 130px);
+  scrollbar-color: var(--scrollbar-color) transparent;
+}
+.container :where(.app-header, .suggestions, .msg, .prompt-wrapper, .disclaimer) {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 980px;
+  padding: 0 20px;
+}
+
+.container .app-header {
+  margin-top: 4vh;
+}
+
+.app-header .heading {
+  font-size: 3rem;
+  width: fit-content;
+  background: linear-gradient(to right, #1df9fd, #9e84fa);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-header .sub-heading {
+  font-size: 2.3rem;
+  margin-top: -3px;
+  color: var(--subheading-color);
+}
+
+/* Suggestions styles */
+
+.container .suggestions {
+  display: flex;
+  gap: 13px;
+  margin-top: 10vh;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.container :is(.app-header, .suggestions) {
+  display: none;
+}
+
+.suggestions .suggestions-item {
+  background: var(--secondary-color);
+  width: 225px;
+  padding: 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-shrink: 0;
+  transition: 0.4s ease;
+}
+.suggestions .suggestions-item:hover {
+  background: var(--secondary-hover-color);
+}
+
+.suggestions .suggestions-item .text {
+  font-size: 1.1rem;
+}
+
+.suggestions .suggestions-item span {
+  height: 43px;
+  width: 43px;
+  margin-top: 33px;
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #1df9fd;
+  background: var(--primary-color);
+}
+
+.suggestions .suggestions-item:nth-child(2) span {
+  color: #3cfa68;
+}
+
+.suggestions .suggestions-item:nth-child(3) span {
+  color: #ffce3b;
+}
+
+.suggestions .suggestions-item:nth-child(4) span {
+  color: #9861ff;
+}
+
+/* Chats container styles */
+
+.container .chats-container {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+
+.chats-container .msg {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+}
+
+.chats-container .msg .message-text {
+  padding: 3px 16px;
+  word-wrap: break-word;
+  white-space: pre-line;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  line-height: 32px;
+}
+
+.chats-container .ai-message .avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 45%;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-right: -10px;
+  margin-top: 14px;
+}
+
+.chats-container .ai-message {
+  margin: -15px auto;
+}
+
+.chats-container .ai-message.loading .avatar {
+  animation: easey 3s infinite;
+}
+
+@keyframes easey {
+  0% {
+    opacity: 70%;
+  }
+  50% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 70%;
+  }
+}
+
+.chats-container .user-message {
+  flex-direction: column;
+  align-items: flex-end;
+}
+.chats-container .user-message .message-text {
+  padding: 10px 15px;
+  background: var(--secondary-color);
+  max-width: 75%;
+  border-radius: 9px 9px 9px 9px;
+  margin-bottom: 12px;
+}
+
+.chats-container .user-message .img-attachment {
+  height: 400px;
+  width: 100%;
+  margin-top: -7px;
+  border-radius: 9px 9px 9px 9px;
+}
+
+.chats-container .user-message .file-attachment {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 10px;
+  margin-top: -7px;
+  border-radius: 9px 9px 9px 9px;
+  background: var(--secondary-color);
+}
+
+.chats-container .user-message .file-attachment span {
+  color: #1ce9ed;
+}
+
+/* Prompt container styles*/
+
+.prompt-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  background: var(--primary-color);
+}
+
+.prompt-container :where(.prompt-wrapper, .prompt-form, .prompt-actions) {
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  align-items: center;
+}
+
+.prompt-wrapper .prompt-form {
+  width: 100%;
+  height: 100%;
+  border-radius: 130px;
+  background: var(--secondary-color);
+}
+
+.prompt-form .prompt-input-box {
+  height: 100%;
+  width: 100%;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--text-color);
+  padding-left: 25px;
+}
+
+.prompt-form .prompt-input-box::placeholder {
+  color: var(--placeholder-color);
+}
+
+.prompt-wrapper button {
+  background: var(--secondary-color);
+  height: 100%;
+  width: 50px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1.4rem;
+  color: var(--text-color);
+  border: none;
+  flex-shrink: 0;
+  transition: 0.4s ease;
+}
+.prompt-wrapper :is(button:hover, .file-icon, #cancel-file-btn) {
+  background: var(--secondary-hover-color)
+}
+
+.prompt-container .disclaimer {
+  text-align: center;
+  font-size: 1rem;
+  padding: 15px 20px 0;
+  color: var(--placeholder-color);
+  font-weight: medium;
+}
+
+.prompt-form #send-prompt-btn {
+  color: white;
+  background: #1ce9ed;
+  display: none;
+}
+
+.prompt-form #send-prompt-btn:hover {
+  background: #16b7ba;
+}
+
+.prompt-form #stop-prompt-btn,
+body.bot-responding .prompt-form .file-upload-wrapper {
+  display: none;
+}
+
+body.bot-responding .prompt-form #stop-prompt-btn {
+  display: block;
+}
+
+.prompt-form .prompt-actions {
+  gap: 4px;
+  margin-right: 2px;
+}
+
+.prompt-wrapper .prompt-form :where(.file-upload-wrapper, button, img) {
+  position: relative;
+  height: 45px;
+  width: 45px;
+}
+
+/* The send prompt button will only be displayed when the input filed conains a value */
+.prompt-form .prompt-input-box:valid ~ .prompt-actions #send-prompt-btn {
+  display: block;
+}
+
+.prompt-form :is(#cancel-file-btn, #stop-prompt-btn:hover) {
+  color: #febf34;
+}
+
+.prompt-wrapper #delete-chats-btn:hover {
+  color: #febf34;
+}
+
+.prompt-form .file-icon {
+  color: #1ce9ed;
+}
+
+.prompt-form .file-upload-wrapper :where(button, img) {
+  position: absolute;
+  border-radius: 50%;
+  object-fit: cover;
+  display: none;
+}
+
+.prompt-form .file-upload-wrapper #add-file-btn,
+.prompt-form .file-upload-wrapper.active.img-attached img,
+.prompt-form .file-upload-wrapper.active.file-attached .file-icon,
+.prompt-form .file-upload-wrapper.active:hover 
+#cancel-file-btn {
+  display: block;
+}
+
+.prompt-form .file-upload-wrapper.active #add-file-btn {
+  display: none;
+}

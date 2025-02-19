@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amadeus</title>
+  <!-- Linking google fonts for icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="makise.css">
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <h1 class="heading">Hello, there</h1>
+      <h1 class="sub-heading">How may i help you?</h1>
+    </header>
+
+    <ul class="suggestions">
+      <li class="suggestions-item">
+        <p class="text">A recommendation of anime based on your interests</p>
+        <span class="material-symbols-rounded">bolt</span>
+      </li>
+      <li class="suggestions-item">
+        <p class="text">Explain the time travel theory into different timelines</p>
+        <span class="material-symbols-rounded">code_blocks</span>
+      </li>
+      <li class="suggestions-item">
+        <p class="text">Summarize the entire first season of steins: gate</p>
+        <span class="material-symbols-rounded">system_update_alt</span>
+      </li>
+      <li class="suggestions-item">
+        <p class="text">Create a program like amadeus which can be just like kurisu (under development)</p>
+        <span class="material-symbols-rounded">add_box</span>
+      </li>
+    </ul>
+
+    <div class="chats-container chats-container-js"></div>
+
+    <div class="prompt-container">
+      <div class="prompt-wrapper">
+        <form action="#" class="prompt-form prompt-form-js">
+          <input type="text" class="prompt-input-box prompt-value-js" placeholder="Ask away.." required>
+          <div class="prompt-actions">
+            <div class="file-upload-wrapper">
+              <img src="#" alt="" class="preview-file">
+              <input type="file" accept="image/*, .pdf, .txt, .csv" id="file-input" hidden>
+              <button type="button" class="file-icon material-symbols-rounded">description</button>
+              <button id="add-file-btn" type="button" class="material-symbols-rounded">attach_file</button>
+              <button id="cancel-file-btn" type="button" class="material-symbols-rounded">close</button>
+            </div>
+            <button type="button" id="stop-prompt-btn" class="material-symbols-rounded">circle</button>
+            <button id="send-prompt-btn" class="material-symbols-rounded">arrow_upward</button>
+          </div>
+        </form>
+
+        <button id="theme-toggle-btn" class="material-symbols-rounded">light_mode</button>
+        <button id="delete-chats-btn" class="material-symbols-rounded">delete</button>
+      </div>
+
+      <p class="disclaimer">Amadeus cannot make mistakes</p>
+    </div>
+
+  </div>
+
+  <script src="makise.js"></script>
+</body>
+</html>
