@@ -1,3 +1,5 @@
+import API_KEY from "./apikey.js";
+
 const container = document.querySelector(".container");
 const chatsContainer = document.querySelector('.chats-container-js');
 const promptForm = document.querySelector('.prompt-form-js');
@@ -10,8 +12,7 @@ const chatHistory = [];
 const userData = { message: "", file: {} };
 let typingInterval, controller;
 
-const api_key = "AIzaSyArRsjUbn3bPR5fB8rWt9MIKjh0ML-iDpg";
-const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${api_key}`;
+const API_url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 const scrollToBottom = () => container.scrollTo({ top: container.scrollHeight, behaviour: "smooth" });
 
@@ -22,7 +23,7 @@ const generateResponse = async(AIMsgDiv) => {
   controller = new AbortController();
 
   // simulate typing effect for AI responses
-  typingEffect = (text, textEle) => {
+  const typingEffect = (text, textEle) => {
     textEle.textcontent = "";
     const words = text.split(" ");
     let wordIndex = 0;
@@ -134,7 +135,7 @@ fileInput.addEventListener("change", () => {
 
   reader.onload = (e) => {
     fileInput.value = "";
-    base64String = e.target.result.split(",")[1]
+    const base64String = e.target.result.split(",")[1]
     fileUploadWrapper.querySelector(".preview-file").src = e.target.result;
     fileUploadWrapper.classList.add("active", isImage ? "img-attached" : "file-attached");
 
